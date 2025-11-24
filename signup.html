@@ -105,7 +105,7 @@
 
       <button id="signup_btn">Submit</button>
     </form> 
-    <p>Already have an account? <a href="login_page.html">Login</a></p>
+    <p>Already have an account? <a href="index.html">Login</a></p>
   </div>
   <script>
     document.getElementById("signup_btn").addEventListener("click",function(){
@@ -118,7 +118,7 @@
         localStorage.setItem("user_name",user_name)
         localStorage.setItem("password",password)
         alert("signup_successful")
-        window.location.href="login.html"
+        window.location.href="index.html"
     }
     });
   </script>
