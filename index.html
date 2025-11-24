@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: aquamarine;
+        }
+        .container{
+             background-color: white;
+      width: 400px;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      margin-top: 10%;
+      margin-left: 30%;
+            
+
+        }
+        input{
+             width: 80%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+        }
+    button{
+        background-color: black;
+        color: white;
+        border: 2px;
+        height: 30px;
+        width: 80px;
+        border-radius: 5px;
+    }
+    </style>
+</head>
+<body>
+       <div class="container">
+    <h1>login</h1>
+        <form action="submit">
+            <input type="text" name="" id="user_name" placeholder="enter username">
+            <br>
+            <input type="text" id="password" placeholder="enter password">
+            <br>
+            <button type="button" id="login_btn">Submit</button>
+        </form>
+        <p>Don't have an account? <a href="signup.html">Sign up</a></p>
+        <script>
+            document.getElementById("login_btn").addEventListener("click",function(){
+                event.preventDefault();
+                const entereduser=document.getElementById("user_name").value.trim();
+                const enteredpass=document.getElementById("password").value.trim();
+                const storeduser=localStorage.getItem("user_name");
+                const storedpass=localStorage.getItem("password");
+                if(entereduser===storeduser && enteredpass===storedpass){
+                    window.location.href = "index.html";
+
+                }
+                else{
+                    alert("invalid username or password")
+                }
+            })
+
+        </script>
+    </div>
+</body>
+</html>

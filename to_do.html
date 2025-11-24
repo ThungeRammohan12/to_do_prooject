@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List</title>
+
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #74b9ff, #a29bfe);
+    }
+
+    .container {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      width: 350px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .container h2 {
+      text-align: center;
+      margin-bottom: 15px;
+      color: #2d3436;
+    }
+
+    .input-area {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    #task {
+      flex: 1;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #b2bec3;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    #task:focus {
+      border-color: #0984e3;
+    }
+
+    #btn {
+      background: #0984e3;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 15px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #btn:hover {
+      background: #74b9ff;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    li {
+      background: #f1f2f6;
+      margin-bottom: 10px;
+      padding: 10px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: 0.3s;
+    }
+
+    li:hover {
+      background: #dfe6e9;
+    }
+
+    li span {
+      flex: 1;
+      color: #2d3436;
+      font-size: 15px;
+    }
+
+    li button {
+      margin-left: 8px;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      color: white;
+      font-size: 13px;
+      transition: 0.3s;
+    }
+
+    li button:nth-child(2) {
+      background-color: #00b894; /* Edit */
+    }
+
+    li button:nth-child(3) {
+      background-color: #d63031; /* Delete */
+    }
+
+    li button:hover {
+      opacity: 0.8;
+    }
+    #logout{
+      margin-left: 38%;
+      background-color: black;
+        color: white;
+        border: 2px;
+        height: 30px;
+        width: 80px;
+        border-radius: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h2>📝 To-Do List</h2>
+    <div class="input-area">
+      <input type="text" id="task" placeholder="Enter a task...">
+      <button id="btn" onclick="add()">Add</button>
+    </div>
+    <ul id="myList"></ul>
+    <button id="logout" >Logout</button>
+  </div>
+
+  <script>
+    const input = document.getElementById("task");
+    const list = document.getElementById("myList");
+
+    // Load saved tasks
+    let myArray = JSON.parse(localStorage.getItem("tasks")) || [];
+
+    renderList();
+
+    function add() {
+      const text = input.value.trim();
+      if (text === "") return;
+
+      myArray.push(text);
+      updateLocalStorage();
+      renderList();
+      input.value = "";
+    }
+
+    function renderList() {
+      list.innerHTML = "";
+
+      myArray.forEach((item, index) => {
+        const li = document.createElement("li");
+
+        const taskText = document.createElement("span");
+        taskText.textContent = item;
+
+        const editBtn = document.createElement("button");
+        editBtn.textContent = "Edit";
+        editBtn.onclick = () => editTask(index);
+
+        const delBtn = document.createElement("button");
+        delBtn.textContent = "Delete";
+        delBtn.onclick = () => deleteTask(index);
+
+        li.appendChild(taskText);
+        li.appendChild(editBtn);
+        li.appendChild(delBtn);
+        list.appendChild(li);
+      });
+    }
+
+    function editTask(index) {
+      const newTask = prompt("Edit your task:", myArray[index]);
+      if (newTask !== null && newTask.trim() !== "") {
+        myArray[index] = newTask.trim();
+        updateLocalStorage();
+        renderList();
+      }
+    }
+
+    function deleteTask(index) {
+      myArray.splice(index, 1);
+      updateLocalStorage();
+      renderList();
+    }
+
+    function updateLocalStorage() {
+      localStorage.setItem("tasks", JSON.stringify(myArray));
+    }
+
+    document.getElementById("logout").addEventListener("click",function(){
+      window.location.href="login_page.html"
+    })
+  </script>
+</body>
+</html>

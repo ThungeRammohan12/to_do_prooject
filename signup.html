@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup Page</title>
+  <style>
+    /* Page background */
+    body {
+      background-color: aquamarine;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    /* Signup box */
+    .container {
+      background-color: white;
+      width: 400px;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+
+    /* Heading */
+    h1 {
+      color: #333;
+      margin-bottom: 25px;
+    }
+
+    /* Label and input styling */
+    label {
+      display: block;
+      text-align: left;
+      margin: 10px 0 5px 10px;
+      font-weight: bold;
+      color: #444;
+    }
+
+    input {
+      width: 90%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+
+    input:focus {
+      border-color: #007bff;
+      outline: none;
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    }
+
+    /* Button styling */
+    button {
+      width: 95%;
+      background-color: #007bff;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Optional link */
+    p {
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Signup</h1>
+    <form>
+      <label for="name">Name:</label>
+      <input type="text" id="user_name" placeholder="Enter name" required>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" placeholder="Enter password" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" placeholder="Enter email" required>
+
+      <button id="signup_btn">Submit</button>
+    </form> 
+    <p>Already have an account? <a href="login_page.html">Login</a></p>
+  </div>
+  <script>
+    document.getElementById("signup_btn").addEventListener("click",function(){
+    const user_name=document.getElementById("user_name").value
+    const password=document.getElementById("password").value
+    if (user_name==="" || password===""){
+        alert("please fill the details")
+    }
+    else{
+        localStorage.setItem("user_name",user_name)
+        localStorage.setItem("password",password)
+        alert("signup_successful")
+        window.location.href="login.html"
+    }
+    });
+  </script>
+</body>
+</html>
